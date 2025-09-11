@@ -42,4 +42,12 @@ public class StudentServiceImpl implements StudentService {
         Student student = stundentRepository.save(newStudent);
         return modelMapper.map(student, StudentDto.class);
     }
+
+    @Override
+    public void deleteStudentById(Long id) {
+        if (!stundentRepository.existsById(id)){
+            throw new IllegalArgumentException("Student Does not exists by id: "+id);
+        }
+        stundentRepository.deleteById(id);
+    }
 }
